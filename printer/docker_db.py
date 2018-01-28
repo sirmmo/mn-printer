@@ -28,7 +28,7 @@ def db_from_env(default_conf):
 
     print(DB_ENGINE, DB_NAME, DB_USER, DB_PASS, DB_HOST, DB_PORT)
 
-    if DB_ENGINE != "":
+    if DB_ENGINE is not None and DB_ENGINE != "":
         ret = {
             "ENGINE":DB_ENGINE
         }

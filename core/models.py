@@ -7,6 +7,8 @@ from django.db import models
 
 class Application(models.Model):
     site = models.ForeignKey(Site)
+    name = models.CharField(max_length=200)
+    slug = models.CharField(max_length=200)
     
     secret = models.UUIDField(default=uuid.uuid4, editable=False)
     
@@ -14,10 +16,9 @@ class Application(models.Model):
         return self.name
         
 class Printer(models.Model):
-    application = models.ForeignKey(Applciation, related_name="printers")
-    
-    name = models.CharField(max_lenght=200)
-    slug = models.CharField(max_lenght=200)
+    application = models.ForeignKey(Application, related_name="printers")
+    name = models.CharField(max_length=200)
+    slug = models.CharField(max_length=200)
 
     validator = models.TextField(null=True, blank=True)
     validate = models.BooleanField(default=False)

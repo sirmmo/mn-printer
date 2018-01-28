@@ -16,6 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from core import views as coreviews
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^print/(?P<application>\w+)/(?P<printer>\w+)\.(?P<form>\w+)$', coreviews.print_data),
+
 ]
