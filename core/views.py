@@ -34,9 +34,12 @@ def render_printer(printer, form, data):
         t = template_from_string(printer.template)
         c = {"data":data}
         if form == "html":
-            return HttpResponse(t.render(c))
+            res = HttpResponse(t.render(c))
+            res["Access-Control-Allow-Origin"] = "*"
+            return res
         elif form == "pdf":
             ret = requests.post("http://weasy:5001/pdf?filename={}.pdf".format(printer.slug), data=t.render(c))
+            ret["Access-Control-Allow-Origin"] = "*"
             return ret
             
         pass
