@@ -38,9 +38,15 @@ def render_printer(printer, form, data):
             res["Access-Control-Allow-Origin"] = "*"
             return res
         elif form == "pdf":
-            ret = requests.post("http://weasy:5001/pdf?filename={}.pdf".format(printer.slug), data=t.render(c))
-            ret["Access-Control-Allow-Origin"] = "*"
-            return ret
+            requests_response = requests.post("http://weasy:5001/pdf?filename={}.pdf".format(printer.slug), data=t.render(c))
+            django_response = HttpResponse(
+                content=requests_response.content,
+                status=requests_response.status_code,
+                content_type=requests_response.headers['Content-Type']
+            )
+
+            django_response["Access-Control-Allow-Origin"] = "*"
+            return django_response
             
         pass
     elif form == "docx":
