@@ -8,17 +8,29 @@ from django.template import engines, TemplateSyntaxError, Template, Context
 import requests
 import json
 
-from .models import *
+from .models import
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
+def list_printers(request, application):
+    printers = Printer.objects.filter(application__slug=application)
+    ret = []
+    for p in printers:
+        ret.append( {
+            "slug":p.slug,
+            "template": p.template,
+            "name":p.name})
+    return HttpResponse(json.dumps(ret))
+    
+    
+
 @csrf_exempt
 def print_data(request, application, printer, form):
-        data = json.loads(request.body)
-        p = Printer.objects.get(slug=printer, application__slug=application)
-        return render_printer(p, form, data)
-        
+    data = json.loads(request.body)
+    p = Printer.objects.get(slug=printer, application__slug=application)
+    return render_printer(p, form, data)
+    
         
 def template_from_string(template_string):
     chain = []

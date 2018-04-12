@@ -21,5 +21,6 @@ from core import views as coreviews
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^print/(?P<application>\w+)/(?P<printer>\w+)\.(?P<form>\w+)$', coreviews.print_data),
+    url(r'^list/(?P<application>\w+)', coreviews.list_printers),
 
 ]
