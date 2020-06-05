@@ -1,4 +1,4 @@
-Django==1.11.9
+Django==1.11.29
 django-cors-headers==2.1.0
 html5lib==0.999
 httplib2==0.8
