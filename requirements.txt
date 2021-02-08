@@ -1,7 +1,7 @@
 Django==1.11.9
 django-cors-headers==2.1.0
 html5lib==0.999
-httplib2==0.8
+httplib2==0.19.0
 keyring==3.5
 lockfile==0.8
 requests==2.2.1
